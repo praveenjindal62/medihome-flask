@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% load static %}
+{% block script %}
+	function submit_query()
+	{
+	var query=document.getElementById("query").value;
+	if(query!="")
+	{
+	window.location="http://"+location.hostname+":8000/search/"+query;
+	return false;
+	 //document.getElementById("search_form").submit();
+	}
+	else
+	return false;
+	}
+	
+	function item_inc()
+	{
+	var total=document.getElementById("total");
+	var price=document.getElementById("price").innerHTML;
+	var i=document.getElementById("itemcount");
+	var count=parseInt(i.value,10);
+	price=parseFloat(price);
+	if(isNaN(count)) 
+	count=0;
+	count+=1;
+	i.value=count;
+	total.innerHTML=(price*count).toFixed(2)+"/-";
+	}
+	
+	function item_dec()
+	{
+	var total=document.getElementById("total");
+	var price=document.getElementById("price").innerHTML;
+	var i=document.getElementById("itemcount");
+	var count=parseInt(i.value,10);
+	price=parseFloat(price);
+	if(isNaN(count)) 
+	count=0;
+	count-=1;
+	if(count<1)
+	count=1
+	i.value=count;
+	total.innerHTML=(price*count).toFixed(2)+"/-";
+	}
+	
+	
+	function addtobasket()
+	{
+		var id=document.getElementById('medid').value;
+		var count=document.getElementById("itemcount").value;
+		location.href="/addtobasket/"+id+"/"+count+"/";
+	}
+
+{% endblock %}
+{% block searchBox %}
+	<div>
+		<form method="get"  onsubmit="return submit_query();" id="search_form">
+			<div class="input-group" >
+				<input type="text" class="form-control" id="query" placeholder="Search your Medicine">
+				<span class="input-group-addon search-span"><span class="glyphicon glyphicon-search "></span></span>
+			</div>
+		</form>
+	</div>
+{% endblock %}
+{% block userDetail %}
+	{% include "userdetail.html" %}
+{% endblock %}
+{% block cartDetail %}
+	{% include "cartmenu.html" %}
+{% endblock %}
+{% block content %}
+<div  style="margin:inherit; width:80%;">
+	<div class="row" style="height:300px;">
+		<div class="col-md-4" >
+			<a href="#" class="thumbnail" style="height:100%">
+			  <img src="{% static "images/demoimage.png" %}"alt="..." height="100%" width="100%">
+			</a>
+		</div>
+		<div class="col-md-8">
+			<div class="panel panel-default" style="height:100%;">
+				<div class="panel-body">
+					<div class="col-md-8">
+						<h2 class="themeify"> {{m.name}}</h2>
+						<table class="table">
+						<tbody>
+							<tr><th>Formula</th><td>{{m.solution}}</td></tr>
+							<tr><th>Company</th><td>{{m.company}}</td></tr>
+							<tr><th>Packing Type</th><td>{{m.get_packing_display}}</td></tr>
+							<tr><th>MFG Date</th><td>{{m.mfg}}</td></tr>
+							<tr><th>Expiry Date</th><td>{{m.expiry}}</td></tr>
+						</tbody>
+						</table>
+					</div>
+					<div class="col-md-4" style="margin-top:20px;" align="center"> 
+						<input type="hidden" id="medid" value="{{m.medid}}"/>
+						<p class="themeify-font"><span class="themeify">Price:&nbsp;</span><span class="themeify" style="font-weight:bold;">&#8377;</span><span id="price">{{m.price}}</span>/{{m.get_packing_display}}</p>
+						<p class="themeify-font themeify">Add {{m.get_packing_display}}s:</p>		
+						<div class="input-group input-group-lg" >
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button" onclick="item_dec();"><span class="glyphicon glyphicon-minus"></span></button>
+						</span>                             
+						<input type="text" class="form-control" value="1" id="itemcount" disabled autocomplete="off">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button" onclick="item_inc();"><span class="glyphicon glyphicon-plus"></span></button>
+						</span>                                      
+						</div>
+						<p class="themeify-font" style="margin-top:10px;"><span class="themeify">Total Price:</p></span>
+						<div style="width:50%;margin:auto;">
+						<span class="label label-default" style="background-color:transparent;color:black;font-size:20px; border:2px solid #2AA330;"><span class="themeify" style="font-weight:bold;">&#8377;</span><span id="total">{{m.price}}/-</span></span>
+						</div>
+						 <button type="button" class="btn btn-default" style="margin-top:15px;" onclick="addtobasket();"><span class="glyphicon glyphicon-shopping-cart" style="color:#2AA330"></span>&nbsp;Add to Basket</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<h3 class="panel-title">SOLUTION INFORMATION</h3>
+				</div>
+				<div class="panel-body">
+					<p class="lead">{{m.saltinfo}}</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Panel title</h3>
+				</div>
+				<div class="panel-body">
+					Panel content
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block viewcart %}
+	{% include "viewcart.html" %}
+{% endblock %}

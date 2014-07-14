@@ -1,0 +1,20 @@
+
+<div class="btn-group">
+	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="background-color:transparent;">Hello&nbsp;
+		{%if log%}
+		<strong>{{u.userfname}}</strong><span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu" role="menu">
+		<li><a href="#">Order History</a></li>
+		<li><a href="#">Profile</a></li>
+		<li><a href="/logout/">Sign Out</a></li>
+    </ul>
+	{%else%}
+	Guest<span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu" role="menu">
+		<li><a href="/signup/">Sign Up</a></li>
+		<li><a href="/login/">Sign In</a></li>
+    </ul>
+	{%endif%}
+</div>

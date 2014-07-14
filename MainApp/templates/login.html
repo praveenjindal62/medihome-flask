@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="row" >
+<div class="panel panel-default" style="width:40%;margin:auto;margin-top:50px;"><div class="panel-body" >
+<form role="form" action="/login/" method="POST">{%csrf_token%}
+<p class="lead">Please Login Here</p>
+{% if warning %}
+<div class="alert alert-danger alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <strong>Warning!</strong> Email or Password in wrong!!
+</div>
+{% endif %}
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" name="email" placeholder="Enter email" required/>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" name="pass" placeholder="Password" required/>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" name="checkbox" /> Keep me logged in
+    </label>
+  </div>
+  <div align="center">
+  <button type="submit" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Sign in</button>
+  <button  class="btn btn-default btn-lg" onclick=" location.href='/signup/';"><span class="glyphicon glyphicon-new-window"></span>&nbsp;Sign up</button>
+  </div>
+</form>
+</div>
+</div>
+</div>
+{% endblock %}

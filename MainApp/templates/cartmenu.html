@@ -1,0 +1,21 @@
+<div class="btn-group">
+
+
+
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="background-color:transparent;">
+    Cart <span class="badge">{{total}}</span>&nbsp;<span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-right" role="menu">
+	{% if total != 0 %}
+	{% for i in l %}
+    <li><a href="/product/{{i.med.medid}}/">{{i.med.name}}&nbsp;&nbsp;<span class="badge">{{i.count}}</span> &nbsp; <span class="themeify" style="font-weight:bold;">&#8377;</span>{{i.price}}/-</a></li>
+	{%endfor%}
+	{%else%}
+	<li><em> &nbsp;&nbsp;Cart Empty</em></li>
+	{%endif%}
+	<li class="divider"></li>
+    <li><a href="#" data-toggle="modal" data-target="#cartModel">View Cart</a></li>
+    <li><a href="/checkout/">Checkout</a></li>
+	<li><a href="/clearcart/">Clear Cart</a></li>	
+  </ul>
+</div>

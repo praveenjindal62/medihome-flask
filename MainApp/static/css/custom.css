@@ -1,0 +1,17 @@
+.themeify,th
+{
+	color:#2AA330;
+}
+a:link {color:#2AA330;}      /* unvisited link */
+a:visited {color:#2AA330;}  /* visited link */
+a:hover {color:#FF0000;}  /* mouse over link */
+a:active {color:#0000FF;}  /* selected link */
+.themeify-font
+{
+	font-size:20px;
+	font-weight:bold;
+}
+.header-back,.search-span
+{
+	background-color:#E8FFE9;
+}

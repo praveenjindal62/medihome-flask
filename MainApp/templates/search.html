@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+{% block script %}
+	function submit_query()
+	{
+	var query=document.getElementById("query").value;
+	if(query!="")
+	{
+	window.location="http://"+location.hostname+":8000/search/"+query;
+	return false;
+	 //document.getElementById("search_form").submit();
+	}
+	else
+	return false;
+	}
+{% endblock %}
+{% block userDetail %}
+	{% include "userdetail.html" %}
+{% endblock %}
+{% block cartDetail %}
+	{% include "cartmenu.html" %}
+{% endblock %}
+{% block content %}
+	<form method="get"  onsubmit="return submit_query();" id="search_form">
+		<div class="input-group" style="width:50%; margin:auto;">
+			<input type="text" class="form-control" id="query" placeholder="Search your Medicine">
+			<span class="input-group-addon search-span"><span class="glyphicon glyphicon-search"></span></span>
+		</div>
+	</form>
+	<div  style="margin:inherit; width:80%;">
+		<div class="row">
+			<blockquote>
+				<small>Search Results for</small>
+				<strong class="themeify">{{query}}</strong>
+			</blockquote>
+			<table class="table table-hover">
+				<thead>
+					<tr class="themeify" >
+					<th >#</th>
+					<th>Medicine Name</th>
+					<th>Formula</th>
+					<th>Manufacturing Company</th>
+					<th>Price</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for i in m %}
+					<tr>
+					<th class="themeify">{{forloop.counter}}</th>
+					<td><a href="/product/{{i.medid}}/">{{i.name}}</a></td>
+					<td>{{i.solution}}</td>
+					<td>{{i.company}}</td>
+					<td><span class="themeify" style="font-weight:bold;">&#8377;</span>&nbsp;{{i.price}}/-</td>
+					</tr>
+				{%endfor%}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock %}
+{% block viewcart %}
+	{% include "viewcart.html" %}
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load static %}
+{% block script %}
+	
+{% endblock %}
+{% block userDetail %}
+	{% include "userdetail.html" %}
+{% endblock %}
+{% block content %}
+<div class="col-md-7">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Order Summary</h3>
+  </div>
+  <div class="panel-body">
+     {% if total != 0 %}
+	  {% for i in l %}
+        <div class="panel panel-default">
+			<div class="panel-heading">
+				<a href="/product/{{i.med.medid}}"><p class="panel-title" class="themeify">#{{forloop.counter}}&nbsp;{{i.med.name}}</p></a>
+				<button type="button" class="btn btn-danger btn-sm" style="float:right; margin-top:-26px;" onclick="location.href='/removeitem/{{i.med.medid}}-checkout';"><span class="glyphicon glyphicon-remove"></span>&nbsp;Remove Item</button>
+			</div>
+			<div class="panel-body">
+				<div class="col-md-4">
+					<h3><span class="label label-default">Total Items</span></h3>
+					<p class="lead">{{i.count}}</p>
+				</div>
+				<div class="col-md-4">
+					<h3><span class="label label-default">Price <small style="color:white">per item</small></span></h3>
+					<p class="lead"><span class="themeify" style="font-weight:bold;">&#8377;</span>{{i.med.price}}/Item</p>
+				</div>
+				<div class="col-md-4">
+					<h3><span class="label label-default">Total Price</span></h3>
+					<p class="lead"><span class="themeify" style="font-weight:bold;">&#8377;</span>{{i.price}}/-</p>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+		{%else%}
+		<h3><em>Cart is Empty<em></h3>
+		<button type="button" class="btn btn-primary" onclick="location.href='/main/'">Continue Shopping</button>
+		{% endif %}
+  </div>
+</div>
+
+</div>
+<div class="col-md-5">
+<div class="panel panel-default">
+  <div class="panel-body">
+    {%if log%}
+	<h3>Personal Information</h3>
+	<table class="table">
+		<thead>
+		<tr><th colspan="2">Customer Details</th>
+		</thead>
+		<tbody>
+		<tr><th>Name</th><td>{{u.userfname}} {{u.userlname}}</td></tr>
+		<tr><th>Address</th><td>{{u.useradd1}},{{u.useradd2}}</td></tr>
+		<tr><th>PhNo</th><td>{{u.userph}}</td></tr>
+		<tr><th>Email</th><td>{{u.useremail}}</td></tr>
+		</tbody>
+	</table>
+	<h3>Order Summary</h3>
+	<table class="table">
+		<tbody>
+		<tr><th>Total Items</th><td>{{totalitem}}</td></tr>
+		<tr><th>Total Amount</th><td><span class="themeify" style="font-weight:bold;">&#8377;</span> {{totalprice}}/-</td></tr>
+		</tbody>
+	</table>
+	{% if total != 0 %}
+	<button type="button" class="btn btn-primary" onclick="location.href='/thanks/'">
+	Checkout
+	</button>
+	{%endif%}
+	<button type="button" class="btn btn-default "  onclick="location.href='/main/'">
+	Conitnue Shopping
+	</button>
+	{% else %}
+	<div class="alert alert-danger" role="alert">You are not Logged in </div>
+	<button type="button" class="btn btn-primary" onclick="location.href='/login/'">
+	Login
+	</button>
+	<button type="button" class="btn btn-default "  onclick="location.href='/signup/'">
+	Signup
+	</button>
+	{% endif %}
+  </div>
+</div>
+</div>
+{% endblock %}
+

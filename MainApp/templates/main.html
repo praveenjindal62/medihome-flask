@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+{% block script %}
+	function submit_query()
+	{
+	var query=document.getElementById("query").value;
+	if(query!="")
+	{
+	location.href="/search/"+query;
+	//window.location="http://"+location.hostname+":8000/search/"+query;
+	return false;
+	 //document.getElementById("search_form").submit();
+	}
+	else
+	return false;
+	}
+{% endblock %}
+{% block userDetail %}
+	{% include "userdetail.html" %}
+{% endblock %}
+{% block cartDetail %}
+	{% include "cartmenu.html" %}
+{% endblock %}
+{% block content %}
+	<h2 class="text-center">
+		Welcome to Online Medi Home
+	</h2>
+	<p class="lead text-center" style="color:#808080">
+		Our Services available in Delhi, Noida, Gurgaon, Agra, Lucknow.
+	</p>
+	<form method="get" onsubmit="return submit_query();" id="search_form">
+		<div class="input-group" style="width:50%; margin:auto;">
+			<input type="text" class="form-control" id="query" placeholder="Search your Medicine">
+			<span class="input-group-addon search-span"><span class="glyphicon glyphicon-search"></span></span>
+		</div>
+	</form>
+	<div  style="margin:inherit; width:80%;">
+		<div class="row">
+			<div class="col-md-3">
+				<a href="#" class="thumbnail">
+					<img src="{% static "images/placeholder.png" %}" alt="...">
+				</a>
+			</div>
+			<div class="col-md-3">
+				<a href="#" class="thumbnail">
+					<img src="{% static "images/placeholder.png"%}" alt="...">
+				</a>
+			</div>
+			<div class="col-md-3">
+				<a href="#" class="thumbnail">
+				  <img src="{% static "images/placeholder.png"%}" alt="...">
+				</a>
+			</div>
+			<div class="col-md-3">
+				<a href="#" class="thumbnail">
+				  <img src="{% static "images/placeholder.png"%}" alt="...">
+				</a>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block viewcart %}
+	{% include "viewcart.html" %}
+{% endblock %}
+
+

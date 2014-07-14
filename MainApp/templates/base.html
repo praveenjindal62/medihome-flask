@@ -1,0 +1,33 @@
+{% load staticfiles %}
+<html>
+	<head>
+		<title>{% block title %}WELCOME TO MEDIHOME{% endblock %}</title>
+		<script src="{% static "js/Jquery.js" %}"></script>
+		<script src="{% static "js/bootstrap.min.js" %}"></script>
+		<script>{% block script %}{% endblock %}</script>
+		<link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet"/>
+		<link href="{% static "css/bootstrap-theme.css" %}" rel="stylesheet"/>
+		<link href="{% static "css/custom.css" %}" rel="stylesheet"/>
+		<style>{% block style %}{% endblock %}</style>
+	</head>
+	<body>
+		<div class="container-fluid header-back">
+			<div class="col-md-4">
+			  <a href="/main/" >
+				<img src="{% static "images/mainLogo.png" %}" width="300px" height="100px"/>
+			  </a>
+			</div>
+			<div class="col-md-4" style="margin-top:30px">
+			{% block searchBox %}{% endblock %}
+			</div>
+			<div class="col-md-4" style="margin-top:30px" align="right">
+			{% block userDetail %}{% endblock %}
+			{% block cartDetail %}{% endblock %}
+			</div>
+		</div>
+		<div style="margin-left:auto;margin-right:auto; margin-top:50px;" >
+			{% block content %}{% endblock %}
+		</div>
+		{% block viewcart %}{% endblock %}
+	</body>
+</html>

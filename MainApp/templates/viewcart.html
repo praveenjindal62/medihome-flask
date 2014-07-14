@@ -1,0 +1,42 @@
+<div class="modal fade" id="cartModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;Shopping Cart</h4>
+      </div>
+      <div class="modal-body">
+	  {% if total != 0 %}
+	  {% for i in l %}
+        <div class="panel panel-default">
+			<div class="panel-heading">
+				<a href="/product/{{i.med.medid}}"><p class="panel-title" class="themeify">#{{forloop.counter}}&nbsp;{{i.med.name}}</p></a>
+				<button type="button" class="btn btn-danger btn-sm" style="float:right; margin-top:-26px;" onclick="location.href='/removeitem/{{i.med.medid}}-{{redirect}}';"><span class="glyphicon glyphicon-remove"></span>&nbsp;Remove Item</button>
+			</div>
+			<div class="panel-body">
+				<div class="col-md-4">
+					<h3><span class="label label-default">Total Items</span></h3>
+					<p class="lead">{{i.count}}</p>
+				</div>
+				<div class="col-md-4">
+					<h3><span class="label label-default">Price <small style="color:white">per item</small></span></h3>
+					<p class="lead"><span class="themeify" style="font-weight:bold;">&#8377;</span>{{i.med.price}}/Item</p>
+				</div>
+				<div class="col-md-4">
+					<h3><span class="label label-default">Total Price</span></h3>
+					<p class="lead"><span class="themeify" style="font-weight:bold;">&#8377;</span>{{i.price}}/-</p>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+		{%else%}
+		<h3><em>Cart is Empty<em></h3>
+		{% endif %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
