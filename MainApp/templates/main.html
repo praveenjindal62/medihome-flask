@@ -1,12 +1,11 @@
 {% extends "base.html" %}
-{% load static %}
 {% block script %}
 	function submit_query()
 	{
 	var query=document.getElementById("query").value;
 	if(query!="")
 	{
-	location.href="/search/"+query;
+	location.href="/search?query="+query;
 	//window.location="http://"+location.hostname+":8000/search/"+query;
 	return false;
 	 //document.getElementById("search_form").submit();
@@ -38,22 +37,22 @@
 		<div class="row">
 			<div class="col-md-3">
 				<a href="#" class="thumbnail">
-					<img src="{% static "images/placeholder.png" %}" alt="...">
+					<img src="{{ url_for('static',filename='images/placeholder.png')}}" alt="...">
 				</a>
 			</div>
 			<div class="col-md-3">
 				<a href="#" class="thumbnail">
-					<img src="{% static "images/placeholder.png"%}" alt="...">
+					<img src= "{{ url_for('static',filename='images/placeholder.png')}}" alt="...">
 				</a>
 			</div>
 			<div class="col-md-3">
 				<a href="#" class="thumbnail">
-				  <img src="{% static "images/placeholder.png"%}" alt="...">
+				  <img src="{{ url_for('static',filename='images/placeholder.png')}}"  alt="...">
 				</a>
 			</div>
 			<div class="col-md-3">
 				<a href="#" class="thumbnail">
-				  <img src="{% static "images/placeholder.png"%}" alt="...">
+				  <img src="{{ url_for('static',filename='images/placeholder.png')}}" alt="...">
 				</a>
 			</div>
 		</div>

@@ -1,9 +1,8 @@
 {% extends "base.html" %}
-{% load static %}
 {% block content %}
 <div class="row" >
 <div class="panel panel-default" style="width:40%;margin:auto;margin-top:50px;"><div class="panel-body" >
-<form role="form" action="/login/" method="POST">{%csrf_token%}
+<form role="form" action="/signin" method="POST">
 <p class="lead">Please Login Here</p>
 {% if warning %}
 <div class="alert alert-danger alert-dismissible" role="alert">
@@ -26,7 +25,7 @@
   </div>
   <div align="center">
   <button type="submit" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Sign in</button>
-  <button  class="btn btn-default btn-lg" onclick=" location.href='/signup/';"><span class="glyphicon glyphicon-new-window"></span>&nbsp;Sign up</button>
+  <button  class="btn btn-default btn-lg" onclick=" location.href='/signup';"><span class="glyphicon glyphicon-new-window"></span>&nbsp;Sign up</button>
   </div>
 </form>
 </div>

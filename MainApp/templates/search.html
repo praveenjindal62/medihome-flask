@@ -1,12 +1,11 @@
 {% extends "base.html" %}
-{% load static %}
 {% block script %}
 	function submit_query()
 	{
 	var query=document.getElementById("query").value;
 	if(query!="")
 	{
-	window.location="http://"+location.hostname+":8000/search/"+query;
+		location.href="/search?query="+query;
 	return false;
 	 //document.getElementById("search_form").submit();
 	}
@@ -46,8 +45,8 @@
 				<tbody>
 				{% for i in m %}
 					<tr>
-					<th class="themeify">{{forloop.counter}}</th>
-					<td><a href="/product/{{i.medid}}/">{{i.name}}</a></td>
+					<th class="themeify">{{loop.index}}</th>
+					<td><a href="/product?id={{i._id}}">{{i.name}}</a></td>
 					<td>{{i.solution}}</td>
 					<td>{{i.company}}</td>
 					<td><span class="themeify" style="font-weight:bold;">&#8377;</span>&nbsp;{{i.price}}/-</td>
