@@ -1,0 +1,48 @@
+version: "3"
+services:
+
+  medihome-app:
+    build: 
+      context: ./MainApp
+      dockerfile: Dockerfile
+    image: praveenjindal62/medihome-app:latest 
+    depends_on:
+      - medihome-db
+    environment:
+      MONGO_HOST: medihome-db
+      MONGO_PORT: 27017
+      FLASK_PORT: &port 5004
+    deploy:
+      replicas: 10
+    networks: 
+      - backend
+
+  medihome-db:
+    build:
+      context: ./MongoDB
+      dockerfile: Dockerfile
+    networks: 
+      - backend
+    volumes: 
+      - dbvolume:/data/db
+
+  nginx:
+    environment:
+      APPURL: medihome-app
+      APPPORT: *port
+    build:
+      context: ./Nginx
+      dockerfile: Dockerfile
+    #image: nginx:latest
+    ports: 
+     - "80:80"
+    depends_on:
+      - medihome-app
+    networks: 
+      - backend
+
+networks:
+  backend: 
+
+volumes:
+  dbvolume:

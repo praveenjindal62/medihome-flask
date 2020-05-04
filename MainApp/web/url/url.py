@@ -35,6 +35,7 @@ def resolveURL(url_string,request_method):
     for urlObj in urlObjlList:
         if(urlObj.match(url_string,request_method)):
             return urlObj.getTargetView()
+    print('URL STRING IS '+ url_string)
     raise Exception("Could not resolve url - " + url_string+ ' # request method - '+ request_method)    
 
 def addURLToList(url_pattern,request_method,view):

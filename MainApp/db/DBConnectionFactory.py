@@ -48,6 +48,7 @@ class MongoConnection:
         
         try:
             _OS_ENV_DBHOST=os.environ['MONGO_HOST']
+            print('Connecting to MongoDB using MONGO_HOST - '+_OS_ENV_DBHOST)
         except KeyError:
             _OS_ENV_DBHOST=None
         except:
@@ -55,6 +56,7 @@ class MongoConnection:
 
         try:
             _OS_ENV_DBPORT=os.environ['MONGO_PORT']
+            print('Connecting to MongoDB using MONGO_PORT - '+_OS_ENV_DBPORT)
         except KeyError:
             _OS_ENV_DBPORT=None
         except:
