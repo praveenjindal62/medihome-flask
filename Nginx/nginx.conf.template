@@ -1,0 +1,15 @@
+
+    # ...
+    upstream appservers {          
+        server $APPURL:$APPPORT      weight=5;
+    }
+    
+    server {
+        port_in_redirect off;	
+    # Location that proxies requests to the upstream group
+        location / {
+            proxy_pass http://appservers;
+            proxy_set_header Host $http_host;
+         }
+    }
+
